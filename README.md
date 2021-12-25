@@ -15,12 +15,11 @@ Also don't forget to `npm install`!
 
 [example run through](./example images/pitch up example.PNG)
 
-Basically you'll need to use the `Command Line` action to run node pointed at these scripts. All of these scripts w
+Basically you'll need to use the `Command Line` action to run node pointed at these scripts. All of these scripts will copy something to your clipboard then 
 
 ## Specific scripts instructions
+All scripts take in two parameters, first is the name of the source and the second is the name of the filter.
 
 ### increase-pitch, decrease-pitch, reset-pitch
-These scripts take in two parameters, first is the name of the source and the second is the name of the filter.
-
-They assume you are using the `pitch/superpitch` plugin.
+These assume you are using the `pitch/superpitch` plugin.
 

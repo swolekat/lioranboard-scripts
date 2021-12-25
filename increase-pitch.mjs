@@ -1,3 +1,3 @@
-import modifyPitch from './modify-pitch.mjs';
+import modifyPitch from './helpers/modify-pitch.mjs';
 
 modifyPitch(note => note + 1);

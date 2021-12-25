@@ -1,8 +1,8 @@
 import clipboardy from 'clipboardy';
 import fs from 'fs';
-import filePaths from './file-paths.js';
+import filePaths from '../file-paths.js';
 
-const modifyPitch = (modifyFunction) => {
+const getUpdatedPluginSettingsToClipboard = (modifyFunction) => {
     const obsSettings = JSON.parse(`${fs.readFileSync(filePaths.obsSceneJsonPath)}`);
 
     const sourceName = process.argv[2];
@@ -20,25 +20,13 @@ const modifyPitch = (modifyFunction) => {
     const {settings} = filter;
     const {chunk_data} = settings;
     const actualData = Buffer.from(chunk_data, 'base64').toString();
-    const stringParts = actualData.split(' ');
-    let noteNumber = Number.parseInt(stringParts[1], 10);
-    let newNoteNumber = modifyFunction(noteNumber);
-    if(newNoteNumber <= -12){
-        newNoteNumber = -12;
-    }
-    if(newNoteNumber >= 12){
-        newNoteNumber = 12;
-    }
-    stringParts[1] = `${newNoteNumber}.000000`;
+    const updatedData = modifyFunction(actualData);
 
-    const newString = stringParts.join(' ');
+    const bufferObj = Buffer.from(updatedData, "utf8");
 
-    const bufferObj = Buffer.from(newString, "utf8");
-
-// Encode the Buffer as a base64 string
     const newBase64Data = bufferObj.toString("base64");
 
     clipboardy.writeSync(newBase64Data);
 };
 
-export default modifyPitch;
+export default getUpdatedPluginSettingsToClipboard;
